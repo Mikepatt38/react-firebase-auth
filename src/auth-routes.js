@@ -2,7 +2,7 @@ import React from 'react';
 import { useUser } from './context/user-context';
 import { useAuth } from './context/auth-context';
 
-export function UserBase() {
+export function AuthenticatedApp() {
   const user = useUser();
   const auth = useAuth();
 

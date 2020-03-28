@@ -1,7 +1,7 @@
 import React from 'react';
 import { useUser } from '../context/user-context';
-import { RegisterForm } from '../unauth-routes';
-import { UserBase } from '../auth-routes';
+import { UnauthenticatedApp } from '../unauth-routes';
+import { AuthenticatedApp } from '../auth-routes';
 import './global.scss';
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
   console.log('The user is: ', user);
   return (
     <div className="App">
-      {user ? <UserBase /> : <RegisterForm />}
+      {user ? <AuthenticatedApp /> : <UnauthenticatedApp />}
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAuth } from './context/auth-context';
 
-export function RegisterForm({ onSubmit }) {
+export function UnauthenticatedApp({ onSubmit }) {
   const auth = useAuth();
 
   function handleSubmit(event) {
