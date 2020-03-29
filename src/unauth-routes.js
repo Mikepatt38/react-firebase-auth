@@ -1,40 +1,29 @@
 import React from 'react';
-import { useAuth } from './context/auth-context';
+import { Routes, Route, Link } from 'react-router-dom';
+import { Register } from './components/auth/Register';
+import { Login } from './components/auth/Login';
 
-export function UnauthenticatedApp({ onSubmit }) {
-  const auth = useAuth();
-
-  function handleSubmit(event) {
-    event.preventDefault();
-    const { email, password, firstName, lastName } = event.target.elements;
-    const userDetails = {
-      firstName: firstName.value,
-      lastName: lastName.value
-    }
-    auth.register(email.value, password.value, userDetails);
-  }
-
+export function UnauthenticatedApp() {
   return (
-    <form
-      onSubmit={handleSubmit}
-    >
-      <div>
-        <label htmlFor="firstName">First Name</label>
-        <input type="text" id="firstName" />
-      </div>
-      <div>
-        <label htmlFor="lastName">Last Name</label>
-        <input type="text" id="lastName" />
-      </div>
-      <div>
-        <label htmlFor="email">Email</label>
-        <input type="text" id="email" />
-      </div>
-      <div>
-        <label htmlFor="password">Password</label>
-        <input type="password" id="password" />
-      </div>
-      <button type="submit">Register</button>
-    </form>
+    <React.Fragment>
+      <nav>
+        <h1>React Firebase Auth</h1>
+      </nav>
+      <main>
+        <AppRoutes />
+      </main>
+    </React.Fragment>
   )
 }
+
+const AppRoutes = () => (
+  <Routes>
+    <Route path="/" element={<UnAuthAction />} />
+    <Route path="/login" element={<Login />} />
+    <Route path="/register" element={<Register />} />
+  </Routes>
+);
+
+const UnAuthAction = () => (
+  <p>You can <Link to="/login">login</Link> or <Link to="/register">register</Link> here.</p>
+);

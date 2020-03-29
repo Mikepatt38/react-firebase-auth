@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { database, auth } from "../utils/firebase";
 
 const AuthContext = React.createContext()
@@ -9,6 +10,7 @@ function AuthProvider({ children }) {
 }
 
 function useProvideAuth() {
+  let navigate = useNavigate();
   const [user, setUser] = React.useState(null);
 
   React.useEffect(() => {
@@ -49,11 +51,13 @@ function useProvideAuth() {
   const login = (email, password) => {
     return auth
       .signInWithEmailAndPassword(email, password)
-      .then(response => handleUser(response.user));
+      .then(response => handleUser(response.user))
+      .then(() => navigate('/dashboard'));
   }
 
   const logout = () => {
-    return auth.signOut();
+    return auth.signOut()
+      .then(() => navigate('/'));
   }
 
   return {

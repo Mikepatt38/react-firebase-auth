@@ -1,15 +1,15 @@
 import React from 'react';
-import { useUser } from '../context/user-context';
+import { useAuth } from '../context/auth-context';
 import { UnauthenticatedApp } from '../unauth-routes';
 import { AuthenticatedApp } from '../auth-routes';
-import './global.scss';
+import './app.scss';
 
 function App() {
-  const user = useUser();
-  console.log('The user is: ', user);
+  const auth = useAuth();
+  console.log('The user is: ', auth.user);
   return (
     <div className="App">
-      {user ? <AuthenticatedApp /> : <UnauthenticatedApp />}
+      {auth.user ? <AuthenticatedApp /> : <UnauthenticatedApp />}
     </div>
   );
 }
